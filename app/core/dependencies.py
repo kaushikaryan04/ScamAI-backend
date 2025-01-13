@@ -1,8 +1,8 @@
 
 from motor.motor_asyncio import AsyncIOMotorClient
 from typing import Optional
-from models.models import indexes
-from core.config import settings
+from ..models.models import indexes
+from .config import settings
 
 class Database:
     def __init__(self):

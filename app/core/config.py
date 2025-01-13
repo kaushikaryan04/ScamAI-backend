@@ -6,8 +6,8 @@ class Settings(BaseSettings):
     APP_NAME: str = "ScamAI MongoDB App"
     DEBUG_MODE: bool = True
 
-    JWT_ALGORITHM = "HS256"
-    ACCESS_TOKEN_EXPIRE_MINUTES = 60
+    JWT_ALGORITHM : str = "HS256"
+    ACCESS_TOKEN_EXPIRE_MINUTES : int = 60
 
     APP_SECRET_KEY: str
     MONGODB_URL: str

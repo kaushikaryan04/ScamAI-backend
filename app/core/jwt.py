@@ -3,7 +3,7 @@ from typing import Union
 from jose import jwt , JWTError
 from passlib.context import CryptContext
 
-from app.core.config import settings
+from .config import settings
 
 def create_access_token(data : dict , expires_delta : Union[timedelta , None ] = None) :
     to_encode = data.copy()

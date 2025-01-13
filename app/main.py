@@ -1,15 +1,15 @@
 from fastapi import FastAPI , Depends
-from core.config import settings
-from core.dependencies import db
+from .core.config import settings
+from .core.dependencies import db
 from fastapi.middleware.cors import CORSMiddleware
-from models.models import ScammerModel
+from .models.models import ScammerModel
 from fastapi.exceptions import HTTPException
 from bson import ObjectId
-from core.jwt import create_access_token
-from core.auth import authenticate_user, get_current_active_user, get_password_hash
+from .core.jwt import create_access_token
+from .core.auth import authenticate_user, get_current_active_user, get_password_hash
 from datetime import timedelta
 from fastapi.security import OAuth2PasswordRequestForm
-from models.models import Token, User , UserRegistration
+from .models.models import Token, User , UserRegistration
 
 
 app = FastAPI(
@@ -90,7 +90,7 @@ async def read_users_me(current_user: User = Depends(get_current_active_user)):
     return current_user
 
 
-@app.post('/register', status = status_code = 201)
+@app.post('/register', status_code = 201)
 async def register_user(user: UserRegistration):
     collection = db.db['users']
     existing_user = await collection.find_one({"$or": [{"username": user.username}, {"email": user.email}]})

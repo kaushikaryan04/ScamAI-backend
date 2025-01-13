@@ -1,15 +1,16 @@
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
-from dependencies import db
+from .dependencies import db
 from bson.objectid import ObjectId
-from jwt import create_access_token, verify_token , verify_password , get_password_hash
-from models.models import UserInDB
+from .jwt import create_access_token, verify_token , verify_password , get_password_hash
+from ..models.models import UserInDB
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
-user_collection = db.db["users"]
+
 
 def get_user(username: str):
+    user_collection = db.db["users"]
     user_data = user_collection.find_one({"username" : username})
     if user_data:
         return UserInDB(**user_data)
