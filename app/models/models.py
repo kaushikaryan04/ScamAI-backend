@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime , timedelta
 from typing import List, Optional, Dict , Tuple , Any
 from enum import Enum
 from pydantic import (
@@ -169,6 +169,30 @@ class ScammerModel(BaseModel):
     @validator("last_updated", always=True)
     def update_timestamp(cls, v):
         return datetime.utcnow()
+
+# JWT AUTHENTICATION STUFF
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
+class TokenData(BaseModel):
+    username: Optional[str] = None
+
+class User(BaseModel):
+    username: str
+    email: Optional[EmailStr] = None
+    disabled: Optional[bool] = None
+
+class UserInDB(User):
+    hashed_password : str
+
+class UserRegistration(BaseModel):
+    username : str
+    email : EmailStr
+    password : str
+
+
 
 
 
